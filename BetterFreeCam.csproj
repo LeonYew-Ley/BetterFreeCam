@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>BetterFreeCam</AssemblyName>
+    <RootNamespace>BetterFreeCam</RootNamespace>
+    <Version>1.0.0</Version>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <DebugType>none</DebugType>
+    <ManagedDir>$(GameDir)/PEAK_Data/Managed</ManagedDir>
+  </PropertyGroup>
+  <Target Name="ValidateLocalReferences" BeforeTargets="ResolveReferences">
+    <Error Condition="'$(GameDir)' == ''" Text="Provide the installed PEAK directory with -p:GameDir=..." />
+    <Error Condition="'$(BepInExCorePath)' == ''" Text="Provide the BepInEx core directory with -p:BepInExCorePath=..." />
+    <Error Condition="!Exists('$(ManagedDir)/Assembly-CSharp.dll')" Text="PEAK managed assemblies were not found under GameDir/PEAK_Data/Managed." />
+    <Error Condition="!Exists('$(BepInExCorePath)/BepInEx.dll')" Text="BepInEx.dll was not found in BepInExCorePath." />
+  </Target>
+  <ItemGroup>
+    <Reference Include="BepInEx"><HintPath>$(BepInExCorePath)/BepInEx.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Assembly-CSharp"><HintPath>$(ManagedDir)/Assembly-CSharp.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Zorro.Core.Runtime"><HintPath>$(ManagedDir)/Zorro.Core.Runtime.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="PhotonUnityNetworking"><HintPath>$(ManagedDir)/PhotonUnityNetworking.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine"><HintPath>$(ManagedDir)/UnityEngine.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(ManagedDir)/UnityEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.InputLegacyModule"><HintPath>$(ManagedDir)/UnityEngine.InputLegacyModule.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>

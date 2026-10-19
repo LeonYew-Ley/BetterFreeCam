@@ -1,0 +1,9 @@
+{
+  "name": "BetterFreeCam",
+  "version_number": "1.0.0",
+  "website_url": "https://github.com/LeonYew-Ley/BetterFreeCam",
+  "description": "Instant-response free camera for PEAK. No movement inertia, look drift, or cinematic camera shake.",
+  "dependencies": [
+    "BepInEx-BepInExPack_PEAK-5.4.75301"
+  ]
+}
